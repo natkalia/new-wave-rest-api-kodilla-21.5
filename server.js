@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const { db } = require('./db');
+let { db } = require('./db'); // TODO: change to const and refactor in endpoints
+const uuid = require('uuid');
 
 const app = express();
 
@@ -25,6 +26,10 @@ app.get('/testimonials', (req, res, next) => {
 })
 
 // get testimonial with chosen id or random
+
+// TODO: id from uuid are not simple integers, this should be refactored
+// to make it possible to find chosen testimonial also when its id is from uuid generator
+// so instead of id as fixed id we probably should refer to index in array
 app.get('/testimonials/:id', (req, res, next) => {
    let id = req.params.id;
    if (id === 'random') {
@@ -37,6 +42,42 @@ app.get('/testimonials/:id', (req, res, next) => {
    res.json(result);
 })
 
+// post new testimonial with uuid generated id
+app.post('/testimonials', (req, res, next) => {
+  randomId = uuid.v4();
+  db.push({id: randomId, author: req.body.author, text: req.body.text});
+  res.json({message: 'OK'}); // or we can send object with new testimonial
+})
+
+// edit existing testimonial using its id - TODO: not finished
+app.put('/testimonials/:id', (req, res, next) => {
+  let id = req.params.id;
+  let author = req.body.author;
+  let text = req.body.text;
+  const result =  db.map(el => {
+    if (el.id == id) {
+      el.author = req.body.author;
+      el.text = req.body.text;
+    }
+    return el;
+  });
+  console.log(result);
+  // TODO: add error handling when no id
+  res.json({message: 'OK'}); // or we can send object with edited testimonial
+})
+
+// delete existing testimonial using its id
+app.delete('/testimonials/:id', (req, res, next) => {
+  let id = req.params.id;
+  const result =  db.filter(el => {
+    return el.id != id;
+  });
+  db = result; // TODO: bad solution, change it
+
+  // TODO: add error handling when no id
+  res.json({message: 'OK'}); // or we can send object with edited testimonial
+}) 
+
 app.listen(8000, () => {
-  console.log('CORD-enabled web server is listening on port: 8000');
+  console.log('CORS-enabled web server is listening on port: 8000');
 });
