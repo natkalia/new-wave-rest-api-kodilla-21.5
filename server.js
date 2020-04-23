@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const db = require('./db'); 
-const uuid = require('uuid');
 const testimonialsRoutes = require('./routes/testimonials.routes');
+const concertsRoutes = require('./routes/concerts.routes');
+const seatsRoutes = require('./routes/seats.routes');
 
 const app = express();
 
@@ -21,8 +21,8 @@ app.use(cors());
 
 // add routes from external files
 app.use('/api', testimonialsRoutes); // add testimonials routes to server
-// app.use('/api', concertsRoutes); // add concerts routes to server
-// app.use('/api', seatsRoutes); // add seats routes to server
+app.use('/api', concertsRoutes); // add concerts routes to server
+app.use('/api', seatsRoutes); // add seats routes to server
 
 // catch incorrect requests
 app.use((req, res, next) => {
