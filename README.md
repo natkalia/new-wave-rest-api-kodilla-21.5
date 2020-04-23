@@ -27,7 +27,7 @@ TO BE UPDATED, structure was changed!
 
 ## Installation
 
-`yarn add` or `npm i`
+`yarn install` or `npm i`
 
 ## Running
 
