@@ -6,7 +6,7 @@ const uuid = require('uuid');
 const app = express();
 
 // middleware to be able to use urlencoded form of requests
-// extended for nested data now false
+// extended for nested data now false (true not useful at this stage)
 app.use(express.urlencoded({ extended: false }));
 
 // middleware to be able to get json responses (e.g. from form-data)
@@ -26,18 +26,19 @@ app.get('/testimonials', (req, res, next) => {
 })
 
 // get testimonial with chosen id or random
-
-// TODO: id from uuid are not simple integers, this should be refactored
-// to make it possible to find chosen testimonial also when its id is from uuid generator
-// so instead of id as fixed id we probably should refer to index in array
 app.get('/testimonials/:id', (req, res, next) => {
    let id = req.params.id;
+   let result;
    if (id === 'random') {
-     id = Math.floor(Math.random() * db.length) + 1;
-   }
-   const result = db.filter(el => {
-    return el.id == id;
-   });
+     let index = Math.floor(Math.random() * db.length);
+     console.log(index);
+     result = db[index];
+    } else {
+      result = db.filter(el => {
+        return el.id == id;
+      });
+    }
+    
    // TODO: add error handling when no id
    res.json(result);
 })
