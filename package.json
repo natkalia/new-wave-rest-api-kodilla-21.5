@@ -1,4 +1,11 @@
 {
+  "name": "rest-api",
+  "author": "Natalia Banasiewicz",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",

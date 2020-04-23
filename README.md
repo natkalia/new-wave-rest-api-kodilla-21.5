@@ -4,7 +4,7 @@ Exercise with REST API endpoints built with Express as exercise during Kodilla w
 
 ## Features
 
-TO BE UPDATED, structure was changed
+TO BE UPDATED, structure was changed!
 
 * REST API standard
 * testimonials database as array of objects in db.js (fake database) including id, author, text fields
@@ -19,8 +19,8 @@ TO BE UPDATED, structure was changed
 
 ## Technologies / tools
 
-* express.js
-* cors
+* express.js (using `express.Router()`)
+* cors middleware for enabling all cors origins
 * uuid for random id generator 
 * endpoints tested with Postman
 * I used nodemon npm package (installed globally so not reflected in package.json dependencies)
@@ -31,8 +31,10 @@ TO BE UPDATED, structure was changed
 
 ## Running
 
-`node server` or `nodemon server` for more convenient development (you need to specifically install nodemon in the second case) 
+* `node server` or `nodemon server` for more convenient development (you need to specifically install nodemon in the second case) 
+
+* default `yarn start` or `npm start` uses nodemon under the hood
 
 ## TODO's
-- [ ] add validation: check if all data is provided and if no, respond with message with error (not necessarily json)
+- [ ] add validation: check if all data is provided and if no, respond with message with error (json msg and error code 404)
 - [ ] add error handling in endpoints when there is no record with searched id
