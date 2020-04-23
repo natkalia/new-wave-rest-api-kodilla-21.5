@@ -6,7 +6,7 @@ const uuid = require('uuid');
 const app = express();
 
 // middleware to be able to use urlencoded form of requests
-// extended for nested data now false (true not useful at this stage)
+// extended not useful at this stage
 app.use(express.urlencoded({ extended: false }));
 
 // middleware to be able to get json responses (e.g. from form-data)
@@ -71,10 +71,7 @@ app.delete('/testimonials/:id', (req, res, next) => {
 }) 
 
 // catch incorrect requests
-// TODO: think what to do if user goes to /testimonials/NOT-VALID-URL 
-// catched here or earlier with message that id is not correct
 app.use((req, res, next) => {
-  // res.status(404).send('404 not found...');
   res.status(404).json({ message: 'Not found...' });
 })
 
