@@ -21,6 +21,15 @@ Exercise with REST API endpoints built with Express as exercise during Kodilla w
 * cors
 * uuid for random id generator 
 * endpoints tested with Postman
+* I used nodemon npm package (installed globally so not reflected in package.json dependencies)
+
+## Installation
+
+`yarn add` or `npm i`
+
+## Running
+
+`node server` or `nodemon server` for more convenient development (you need to specifically install nodemon in the second case) 
 
 ## TODO's
 - [ ] add validation: check if all data is provided and if no, respond with message with error (not necessarily json)
