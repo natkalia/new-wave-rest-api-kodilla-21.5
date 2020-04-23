@@ -58,11 +58,11 @@ router.route("/concerts/:id").put((req, res, next) => {
 
 // delete existing concert using its id
 router.route("/concerts/:id").delete((req, res, next) => {
-    const id = req.params.id;
-    const testimonial = db.concerts.filter((el) => el.id == id);
-    const index = db.concerts.indexOf(testimonial[0]);
-    db.concerts.splice(index, 1);
-    res.json({ message: "OK" });
-  });
+  const id = req.params.id;
+  const testimonial = db.concerts.filter((el) => el.id == id);
+  const index = db.concerts.indexOf(testimonial[0]);
+  db.concerts.splice(index, 1);
+  res.json({ message: "OK" });
+});
 
 module.exports = router;
