@@ -78,6 +78,14 @@ app.delete('/testimonials/:id', (req, res, next) => {
   res.json({message: 'OK'}); // or we can send object with edited testimonial
 }) 
 
+// catch incorrect requests
+// TODO: think what to do if user goes to /testimonials/NOT-VALID-URL 
+// catched here or earlier with message that id is not correct
+app.use((req, res, next) => {
+  // res.status(404).send('404 not found...');
+  res.status(404).json({ message: 'Not found...' });
+})
+
 app.listen(8000, () => {
   console.log('CORS-enabled web server is listening on port: 8000');
 });
