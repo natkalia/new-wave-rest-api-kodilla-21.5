@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-let { db } = require('./db'); // TODO: change to const and refactor in endpoints
+const { db } = require('./db'); // TODO: change to const and refactor in endpoints
 const uuid = require('uuid');
 
 const app = express();
@@ -27,7 +27,7 @@ app.get('/testimonials', (req, res, next) => {
 
 // get testimonial with chosen id or random
 app.get('/testimonials/:id', (req, res, next) => {
-   let id = req.params.id;
+   const id = req.params.id;
    let result;
    if (id === 'random') {
      let index = Math.floor(Math.random() * db.length);
@@ -38,8 +38,6 @@ app.get('/testimonials/:id', (req, res, next) => {
         return el.id == id;
       });
     }
-    
-   // TODO: add error handling when no id
    res.json(result);
 })
 
@@ -47,36 +45,29 @@ app.get('/testimonials/:id', (req, res, next) => {
 app.post('/testimonials', (req, res, next) => {
   randomId = uuid.v4();
   db.push({id: randomId, author: req.body.author, text: req.body.text});
-  res.json({message: 'OK'}); // or we can send object with new testimonial
+  res.json({message: 'OK'}); 
 })
 
-// edit existing testimonial using its id - TODO: not finished
+// edit existing testimonial using its id
 app.put('/testimonials/:id', (req, res, next) => {
-  let id = req.params.id;
-  let author = req.body.author;
-  let text = req.body.text;
-  const result =  db.map(el => {
+  const id = req.params.id;
+  db.map(el => {
     if (el.id == id) {
       el.author = req.body.author;
       el.text = req.body.text;
     }
     return el;
   });
-  console.log(result);
-  // TODO: add error handling when no id
-  res.json({message: 'OK'}); // or we can send object with edited testimonial
+  res.json({message: 'OK'}); 
 })
 
 // delete existing testimonial using its id
 app.delete('/testimonials/:id', (req, res, next) => {
-  let id = req.params.id;
-  const result =  db.filter(el => {
-    return el.id != id;
-  });
-  db = result; // TODO: bad solution, change it
-
-  // TODO: add error handling when no id
-  res.json({message: 'OK'}); // or we can send object with edited testimonial
+  const id = req.params.id;
+  const testimonial = db.filter(el => el.id == id);
+  const index = db.indexOf(testimonial[0]);
+  db.splice(index, 1);
+  res.json({message: 'OK'}); 
 }) 
 
 // catch incorrect requests

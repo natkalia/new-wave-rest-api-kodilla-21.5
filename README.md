@@ -33,3 +33,4 @@ Exercise with REST API endpoints built with Express as exercise during Kodilla w
 
 ## TODO's
 - [ ] add validation: check if all data is provided and if no, respond with message with error (not necessarily json)
+- [ ] add error handling in endpoints when there is no record with searched id
