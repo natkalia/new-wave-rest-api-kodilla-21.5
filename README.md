@@ -1,8 +1,10 @@
-# Testimonials REST API server
+# REST API server with testimonials, concerts, seats
 
 Exercise with REST API endpoints built with Express as exercise during Kodilla webdeveloper bootcamp (Module 21.5).
 
 ## Features
+
+TO BE UPDATED, structure was changed
 
 * REST API standard
 * testimonials database as array of objects in db.js (fake database) including id, author, text fields
