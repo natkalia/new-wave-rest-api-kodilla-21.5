@@ -77,6 +77,12 @@ For backend server:
 For frontend:
 * go into `client` folder and run `yarn start` or `npm start`
 
+Note also: By default backend server is running on `localhost:8000` and frontend on `localhost:3000`. Express server is configured to use cors middleware enabling requests from all origins.
+
 ## TODO's
 - [ ] add validation: check if all data is provided and if no, respond with message with error (json msg and error code 404)
 - [ ] add error handling in endpoints when there is no record with searched id
+- [ ] add and configure eslint for future easier development
+- [ ] implement one command to run both frontend and backend (e.g. concurrently npm package)
+- [ ] add real database
+- [ ] add custom content
