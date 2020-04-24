@@ -9,7 +9,7 @@ Coming soon.
 
 ## Live
 
-Coming soon.
+[Click to see live on Heroku](https://new-wave-festiv.herokuapp.com/)
 
 ## Features
 
