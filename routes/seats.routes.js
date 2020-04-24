@@ -27,18 +27,25 @@ router.route("/seats/:id").get((req, res, next) => {
 });
 
 // post new seat with uuid generated id
-
-// { id: 6, day: 2, seat: 2, client: 'Molier Lo Celso', email: 'moiler.lo.celso@example.com' },
 router.route("/seats").post((req, res, next) => {
-  randomId = uuid.v4();
-  db.seats.push({
-    id: randomId,
-    day: req.body.day,
-    seat: req.body.seat,
-    client: req.body.client,
-    email: req.body.email,
+  let ifSeatFree = true;
+  db.seats.forEach(seat => {
+    if ((seat.day == req.body.day) && (seat.seat == req.body.seat)) {
+      ifSeatFree = false;
+      res.status(404).json({ message: 'The slot is already taken...' }); // TODO: check if error code ok
+    }
   });
-  res.json({ message: "OK" });
+  if (ifSeatFree) {
+    randomId = uuid.v4();
+    db.seats.push({
+      id: randomId,
+      day: req.body.day,
+      seat: req.body.seat,
+      client: req.body.client,
+      email: req.body.email,
+    });
+    res.json({ message: "OK" })
+  }
 });
 
 // edit existing seat using its id
