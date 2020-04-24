@@ -28,17 +28,15 @@ app.use('/api', testimonialsRoutes); // add testimonials routes to server
 app.use('/api', concertsRoutes); // add concerts routes to server
 app.use('/api', seatsRoutes); // add seats routes to server
 
-// catch incorrect requests
-app.use((req, res, next) => {
-  res.status(404).json({ message: 'Not found...' });
-});
-
 // endpoint sending whole front app (setup for heroku)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-
+// catch incorrect requests
+app.use((req, res, next) => {
+  res.status(404).send({ message: 'Not found...' });
+});
 
 // if heroku, take port from heroku environment variables, otherwise localhost:8000
 app.listen(process.env.PORT || 8000, () => {
