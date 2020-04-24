@@ -58,7 +58,7 @@ Backend:
 * cors middleware for enabling all cors origins
 * uuid for random id generator 
 * endpoints tested with Postman
-* I used nodemon npm package (installed globally so not reflected in package.json dependencies)
+* nodemon
 
 Database:
 * At this stage only simulated in `db.js` file
