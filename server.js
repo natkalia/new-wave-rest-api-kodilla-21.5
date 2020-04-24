@@ -3,6 +3,7 @@ const cors = require('cors');
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
+const path = require('path');
 
 const app = express();
 
@@ -19,6 +20,9 @@ app.use(express.json());
 // middleware enabling all CORS Requests
 app.use(cors());
 
+// serve static files from the React app (setup for heroku)
+app.use(express.static(path.join(__dirname, '/client/build')));
+
 // add routes from external files
 app.use('/api', testimonialsRoutes); // add testimonials routes to server
 app.use('/api', concertsRoutes); // add concerts routes to server
@@ -29,6 +33,14 @@ app.use((req, res, next) => {
   res.status(404).json({ message: 'Not found...' });
 });
 
-app.listen(8000, () => {
-  console.log('CORS-enabled web server is listening on port: 8000');
+// endpoint sending whole front app (setup for heroku)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+
+
+// if heroku, take port from heroku environment variables, otherwise localhost:8000
+app.listen(process.env.PORT || 8000, () => {
+  console.log('Server is running on port: 8000');
 });
